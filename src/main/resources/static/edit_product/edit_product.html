@@ -1,0 +1,23 @@
+<div class = "container">
+
+    <h1>Товар</h1>
+    <form  novalidate ng-submit="updateProduct()" >
+        <div class="form-row align-items-center" >
+            <div class="col-auto">
+                <label for="id" class="sr-only">Id</label>
+                <input name="id" ng-model="product.id" id="id" type="text" class="form-control mb-2" readonly>
+            </div>
+            <div class="col-auto">
+                <label for="title" class="sr-only">Название</label>
+                <input name="title" ng-model="product.title" id="title" type="text" class="form-control mb-2"  placeholder="Название">
+            </div>
+            <div class="col-auto">
+                <label for="price" class="sr-only">Цена</label>
+                <input name="price" ng-model="product.max_price" id="price" type="number" class="form-control mb-2"  placeholder="Цена">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">Сохранить</button>
+            </div>
+        </div>
+    </form>
+</div>
