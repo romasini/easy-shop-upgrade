@@ -9,6 +9,7 @@ angular.module('app').controller('storeController', function ($scope, $http) {
                     titlePart: $scope.filter ? $scope.filter.title_part : null,
                     minPrice: $scope.filter ? $scope.filter.min_price : null,
                     maxPrice: $scope.filter ? $scope.filter.max_price : null,
+                    category: $scope.filter ? $scope.filter.category : null,
                     p: pageIndex
                 }
             })
@@ -39,7 +40,19 @@ angular.module('app').controller('storeController', function ($scope, $http) {
                     .then(function (response) {
                         console.log('ok');
                     });
-            }
+        }
 
+        $scope.fillCategories = function(){
+                $http({
+                    url: contextPath + '/api/v1/category',
+                    method: 'GET'
+                })
+                    .then(function (response) {
+                    console.log("tut");
+                      $scope.categories = response.data;
+                });
+        }
+
+        $scope.fillCategories();
         $scope.fillTable();
 });
