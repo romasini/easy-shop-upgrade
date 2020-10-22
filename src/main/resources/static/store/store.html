@@ -1,4 +1,27 @@
 <div class = "container">
+    <br>
+        <form  novalidate ng-submit="fillTable()" >
+            <div class="filter form-row align-items-center" >
+                <div class="col-auto">
+                    <label for="titlePart" class="sr-only">Название</label>
+                    <input name="titlePart" ng-model="filter.title_part" id="titlePart" type="text" class="form-control mb-2"  placeholder="Название">
+                </div>
+                <div class="col-auto">
+                    <label for="minPriceInput" class="sr-only">Цена От</label>
+                    <input name="minPrice" ng-model="filter.min_price" id="minPriceInput" type="number" class="form-control mb-2"  placeholder="Цена От">
+                </div>
+                <div class="col-auto">
+                    <label for="maxPriceInput" class="sr-only">Цена До</label>
+                    <input name="maxPrice" ng-model="filter.max_price" id="maxPriceInput" type="number" class="form-control mb-2"  placeholder="Цена До">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-2">Фильтровать</button>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-success mb-2" ng-click="cleanFilter()">Очистить</button>
+                </div>
+            </div>
+        </form>
 
         <h1>Список товаров</h1>
         <table class="table table-hover" cellpadding="0" cellspacing="0">
@@ -7,6 +30,7 @@
                     <td>ID</td>
                     <td>Название</td>
                     <td>Цена</td>
+                    <td>Категория</td>
                     <td></td>
                 </tr>
             </thead>
@@ -17,6 +41,7 @@
                         {{p.title}}
                     </td>
                     <td>{{p.price}}</td>
+                    <td>{{p.category.title}}</td>
                     <td>
                         <button class="btn btn-success" ng-click="addToCart(p.id)">Добавить в корзину</button>
                     </td>
@@ -39,26 +64,5 @@
             </ul>
         </nav>
 
-    <form  novalidate ng-submit="fillTable()" >
-        <div class="filter form-row align-items-center" >
-            <div class="col-auto">
-                <label for="titlePart" class="sr-only">Название</label>
-                <input name="titlePart" ng-model="filter.title_part" id="titlePart" type="text" class="form-control mb-2"  placeholder="Название">
-            </div>
-            <div class="col-auto">
-                <label for="minPriceInput" class="sr-only">Цена От</label>
-                <input name="minPrice" ng-model="filter.min_price" id="minPriceInput" type="number" class="form-control mb-2"  placeholder="Цена От">
-            </div>
-            <div class="col-auto">
-                <label for="maxPriceInput" class="sr-only">Цена До</label>
-                <input name="maxPrice" ng-model="filter.max_price" id="maxPriceInput" type="number" class="form-control mb-2"  placeholder="Цена До">
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-2">Фильтровать</button>
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-success mb-2" ng-click="cleanFilter()">Очистить</button>
-            </div>
-        </div>
-    </form>
+
 </div>

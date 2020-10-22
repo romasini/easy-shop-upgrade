@@ -1,15 +1,13 @@
 package ru.romasini.easy.shop.upgrade.entities;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "products")
-@NoArgsConstructor
-public class Product {
+@Table(name = "categories")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,12 +16,5 @@ public class Product {
 
     @Column(name = "title")
     private String title;
-
-    @Column(name = "price")
-    private Integer price;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
 
 }
