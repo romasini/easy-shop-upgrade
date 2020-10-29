@@ -5,6 +5,7 @@ import org.springframework.data.jpa.domain.Specification;
 import ru.romasini.easy.shop.upgrade.entities.Product;
 import ru.romasini.easy.shop.upgrade.repositories.specifications.ProductSpecifications;
 
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -33,6 +34,12 @@ public class ProductFilter {
             Integer maxPrice = Integer.parseInt(params.get("maxPrice"));
             spec = spec.and(ProductSpecifications.priceLesserOrEqualsThan(maxPrice));
             filterDefinitionBuilder.append("&maxPrice=").append(maxPrice);
+        }
+
+        if (params.containsKey("category") && !params.get("category").isBlank()){
+            Integer category = Integer.parseInt(params.get("category"));
+            spec = spec.and(ProductSpecifications.categoryEquals(category));
+            filterDefinitionBuilder.append("&category=").append(category);
         }
 
         filterDefinition = filterDefinitionBuilder.toString();

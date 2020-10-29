@@ -1,6 +1,7 @@
 package ru.romasini.easy.shop.upgrade.repositories.specifications;
 
 import org.springframework.data.jpa.domain.Specification;
+import ru.romasini.easy.shop.upgrade.entities.Category;
 import ru.romasini.easy.shop.upgrade.entities.Product;
 
 public class ProductSpecifications {
@@ -17,4 +18,7 @@ public class ProductSpecifications {
         return (Specification<Product>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("title"), String.format("%%%s%%", titlePart));
     }
 
+    public static Specification<Product> categoryEquals(int category){
+        return (Specification<Product>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("category").get("id"), category);
+    }
 }
