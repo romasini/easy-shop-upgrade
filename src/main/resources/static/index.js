@@ -17,7 +17,10 @@
                 templateUrl: 'store/store.html',
                 controller: 'storeController'
             })
-
+            .when('/add_order', {
+                templateUrl: 'add_order/add_order.html',
+                controller: 'addOrderController'
+            })
             .when('/cart', {
                 templateUrl: 'cart/cart.html',
                 controller: 'cartController'

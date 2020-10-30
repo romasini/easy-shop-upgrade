@@ -41,7 +41,8 @@ CREATE TABLE order_items (
     product_id bigint REFERENCES products(id),
     order_id bigint REFERENCES orders(id),
     quantity INT,
-    price INT);
+    price INT,
+    price_per_product INT);
 
 INSERT INTO roles(name)
 VALUES

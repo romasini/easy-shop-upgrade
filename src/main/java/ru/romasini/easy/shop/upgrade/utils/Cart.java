@@ -28,6 +28,7 @@ public class Cart {
     @PostConstruct
     public void init(){
         items = new ArrayList<>();
+        amount = 0;
     }
 
     public void addOrIncrement(Long productId) {
