@@ -22,9 +22,6 @@ public class Product {
     @Column(name = "price")
     private Integer price;
 
-//    @Column(name = "category_id")
-//    private Long categoryId;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
