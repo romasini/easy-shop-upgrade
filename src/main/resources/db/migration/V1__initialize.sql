@@ -74,7 +74,7 @@ VALUES
 
 INSERT INTO profiles(user_id, firstname, lastname, phone, email, birthdate, sex, address)
 VALUES
-(1, 'Peter', 'Peterson', '888999999', 'admin@market.ru', '2000-01-01', 'm', 'St.Petersburg, Nevsky prospekt, 10'),
+(1, 'Peter', 'Peterson', '888999999', 'admin@market.ru', '2000-10-02', 'm', 'St.Petersburg, Nevsky prospekt, 10'),
 (2, 'Andrew', 'Petrov', '878969799', 'manager1@market.ru', '1995-01-10', 'm', 'St.Petersburg, 1 line, 1');
 
 INSERT INTO categories (title)

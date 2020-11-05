@@ -25,6 +25,10 @@
                 templateUrl: 'add_order/add_order.html',
                 controller: 'addOrderController'
             })
+            .when('/profile', {
+                 templateUrl: 'profile/profile.html',
+                 controller: 'profileController'
+            })
             .when('/cart', {
                 templateUrl: 'cart/cart.html',
                 controller: 'cartController'

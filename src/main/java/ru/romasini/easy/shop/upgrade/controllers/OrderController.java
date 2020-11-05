@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ru.romasini.easy.shop.upgrade.dto.OrderDto;
 import ru.romasini.easy.shop.upgrade.entities.Order;
@@ -28,10 +29,10 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addNewOrder(@RequestParam String name,
-                              @RequestParam String phone,
-                              @RequestParam String address,
+                            @RequestParam String phone,
+                            @RequestParam String address,
                               Principal principal){
-        User user = userService.findByUsername(principal.getName());
+        User user = userService.findByUsername(principal.getName()).orElseThrow(()-> new UsernameNotFoundException(String.format("User '%s' not found", principal.getName())));
 
         Order order = new Order();
         order.setUser(user);

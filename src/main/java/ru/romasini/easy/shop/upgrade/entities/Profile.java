@@ -35,7 +35,7 @@ public class Profile {
     private Date birthdate;
 
     @Column
-    private Character sex;
+    private String sex;
 
     @Column
     private String address;
