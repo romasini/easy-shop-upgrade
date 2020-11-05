@@ -1,0 +1,45 @@
+<div class = "container">
+    <br>
+    <h1>Список заказов</h1>
+    <br>
+    <div class = "container-table d-flex" >
+        <div class="table">
+            <table class="table table-hover" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Имя</td>
+                    <td>Телефон</td>
+                    <td>Адрес</td>
+                    <td>Цена</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="p in OrdersPage.content">
+                    <td>{{p.id}}</td>
+                    <td>{{p.name}}</td>
+                    <td>{{p.phone}}</td>
+                    <td>{{p.address}}</td>
+                    <td>{{p.price}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" ng-disabled="OrdersPage.first">
+                <a class="page-link" ng-click="fillTable(OrdersPage.number>0 ? OrdersPage.number : 1)">Назад</a>
+            </li>
+            <li class="page-item" ng-repeat = "i in PaginationArray">
+                <a class="page-link" ng-click="fillTable(i)">{{i}}</a>
+            </li>
+            <li class="page-item" ng-disabled="OrdersPage.last">
+                <a class="page-link" ng-click="fillTable(OrdersPage.number+2<OrdersPage.totalPages ? OrdersPage.number+2 : OrdersPage.totalPages)">Вперед</a>
+            </li>
+        </ul>
+    </nav>
+
+
+</div>

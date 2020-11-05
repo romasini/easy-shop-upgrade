@@ -7,7 +7,6 @@ angular.module('app').controller('cartController', function ($scope, $http) {
             method: 'GET'
         })
             .then(function (response) {
-                console.log("response.data");
                 $scope.cart = response.data;
             });
     };
