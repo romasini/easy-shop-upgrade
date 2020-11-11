@@ -36,10 +36,7 @@ angular.module('app').controller('storeController', function ($scope, $http) {
                 $http({
                     url: contextPath + '/api/v1/cart/add/' + productId,
                     method: 'GET'
-                })
-                    .then(function (response) {
-                        console.log('ok');
-                    });
+                });
         }
 
         $scope.fillCategories = function(){
@@ -48,8 +45,7 @@ angular.module('app').controller('storeController', function ($scope, $http) {
                     method: 'GET'
                 })
                     .then(function (response) {
-                    console.log("tut");
-                      $scope.categories = response.data;
+                    $scope.categories = response.data;
                 });
         }
 

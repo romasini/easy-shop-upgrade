@@ -28,9 +28,21 @@ CREATE TABLE users_roles(
     PRIMARY KEY(user_id, role_id)
 );
 
+CREATE TABLE profiles(
+    id bigserial PRIMARY KEY,
+    user_id bigint REFERENCES users(id),
+    firstname VARCHAR(255),
+    lastname VARCHAR(255),
+    phone VARCHAR(150),
+    email VARCHAR(150),
+    birthdate date,
+    sex char(1) default 'x',
+    address VARCHAR(255)
+);
+
 CREATE TABLE orders (
     id bigserial PRIMARY KEY,
-    user_id VARCHAR(255) REFERENCES users(id),
+    user_id bigint REFERENCES users(id),
     customer_name VARCHAR(255),
     customer_phone VARCHAR(255),
     customer_address VARCHAR(255) ,
@@ -59,6 +71,11 @@ INSERT INTO users_roles(user_id, role_id)
 VALUES
 (1,1),
 (2,2);
+
+INSERT INTO profiles(user_id, firstname, lastname, phone, email, birthdate, sex, address)
+VALUES
+(1, 'Peter', 'Peterson', '888999999', 'admin@market.ru', '2000-10-02', 'm', 'St.Petersburg, Nevsky prospekt, 10'),
+(2, 'Andrew', 'Petrov', '878969799', 'manager1@market.ru', '1995-01-10', 'm', 'St.Petersburg, 1 line, 1');
 
 INSERT INTO categories (title)
 VALUES

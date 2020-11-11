@@ -19,7 +19,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/v1/**").authenticated()
+                .antMatchers("/api/v1/orders/**").authenticated()
+                .antMatchers("/api/v1/orders**").authenticated()
+                .antMatchers("/api/v1/cart/**").authenticated()
+                .antMatchers("/api/v1/cart").authenticated()
+                .antMatchers("/api/v1/profile**").authenticated()
+                .antMatchers("/api/v1/products**").permitAll()
+                .antMatchers("/api/v1/registration**").permitAll()
+                .antMatchers("/api/v1/category**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().permitAll()
                 .and()

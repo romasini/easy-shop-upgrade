@@ -17,9 +17,17 @@
                 templateUrl: 'store/store.html',
                 controller: 'storeController'
             })
+            .when('/orders', {
+                templateUrl: 'orders/orders.html',
+                controller: 'ordersController'
+            })
             .when('/add_order', {
                 templateUrl: 'add_order/add_order.html',
                 controller: 'addOrderController'
+            })
+            .when('/profile', {
+                 templateUrl: 'profile/profile.html',
+                 controller: 'profileController'
             })
             .when('/cart', {
                 templateUrl: 'cart/cart.html',
@@ -41,7 +49,7 @@
                         console.log(rejection.data);
                         var answer = JSON.parse(rejection.data);
                         console.log(answer);
-                        // window.alert(answer.message);
+
                     }
                     defer.reject(rejection);
                     return defer.promise;

@@ -25,8 +25,16 @@ public class OrderService {
         return orderRepository.findAllByUser(user, PageRequest.of(numPage, sizePage));
     }
 
+    public Page<Order> findAllByUsername(String username, Integer numPage, int sizePage){
+        return orderRepository.findAllByUsername(username, PageRequest.of(numPage, sizePage));
+    }
+
     public Optional<Order> findById(Long id){
         return orderRepository.findById(id);
+    }
+
+    public Optional<Order> findByIdAndUsername(Long id, String username){
+        return orderRepository.findByIdAndUsername(id, username);
     }
 
     public Order save(Order order){

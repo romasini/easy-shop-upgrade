@@ -38,6 +38,9 @@ public class OrderItem {
         this.pricePerProduct = product.getPrice();
     }
 
+    public OrderItem() {
+    }
+
     public void incrementQuantity() {
         quantity++;
     }
