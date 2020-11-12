@@ -15,16 +15,10 @@ angular.module('app').controller('profileController', function ($scope, $http) {
              $http({
                  url: contextPath + '/api/v1/profile',
                  method: 'PUT',
+                 data: $scope.Profile,
                  params: {
-                        password: $scope.Profile ? $scope.Profile.password : null,
-                        firstname: $scope.Profile ? $scope.Profile.firstname : null,
-                        lastname: $scope.Profile ? $scope.Profile.lastname : null,
-                        phone: $scope.Profile ? $scope.Profile.phone : null,
-                        email: $scope.Profile ? $scope.Profile.email : null,
-                        birthdate: $scope.Profile ? $scope.Profile.birthdate : null,
-                        sex: $scope.Profile ? $scope.Profile.sex : null,
-                        address: $scope.Profile ? $scope.Profile.address : null
-                        }
+                     password: $scope.password,
+                     }
                  })
                  .then(function (response) {
                     alert('Профиль изменен');

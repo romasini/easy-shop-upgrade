@@ -22,48 +22,26 @@ public class ProfileController {
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     public ProfileDto getProfile(Principal principal){
         User user = userService.findByUsername(principal.getName()).orElseThrow(()-> new UsernameNotFoundException(String.format("User '%s' not found", principal.getName())));
         return new ProfileDto(user.getProfile());
     }
 
     @PutMapping
-    public ProfileDto updateProfile(@RequestParam String password,
-                                    @RequestParam Map<String, String> params,
+    public ProfileDto updateProfile(@RequestBody ProfileDto profileDto,
+                                    @RequestParam String password,
                                     Principal principal){
-         User user = userService.findByUsername(principal.getName()).orElseThrow(()-> new UsernameNotFoundException(String.format("User '%s' not found", principal.getName())));
+        User user = userService.findByUsername(principal.getName()).orElseThrow(()-> new UsernameNotFoundException(String.format("User '%s' not found", principal.getName())));
         if(!passwordEncoder.matches(password, user.getPassword())) throw new ResourceNotFoundException("Password uncorrect");
         Profile profile = user.getProfile();
-
-        String firstname = params.get("firstname");
-        if(firstname != null) profile.setFirstname(firstname);
-
-        String lastname = params.get("lastname");
-        if(lastname != null) profile.setLastname(lastname);
-
-        String phone = params.get("phone");
-        if(phone != null) profile.setPhone(phone);
-
-        String email = params.get("email");
-        if(email != null) profile.setEmail(email);
-
-//        String birthdate = params.get("birthdate");
-//        if(birthdate != null) {
-//            DateFormat df = DateFormat.getInstance();
-//            try {
-//                profile.setBirthdate(df.parse(birthdate));
-//            } catch (ParseException e) {
-//                throw new ResourceNotFoundException("Birthdate uncorrect");
-//            }
-//        }
-
-        String sex =  params.get("sex");
-        if(sex != null) profile.setSex(sex);
-
-        String address =  params.get("address");
-        if(address != null) profile.setAddress(address);
-
+        profile.setAddress(profileDto.getAddress());
+        profile.setBirthdate(profileDto.getBirthdate());
+        profile.setEmail(profileDto.getEmail());
+        profile.setPhone(profileDto.getPhone());
+        profile.setLastname(profileDto.getLastname());
+        profile.setFirstname(profileDto.getFirstname());
+        profile.setSex(profileDto.getSex());
         profile = profileService.save(profile);
         return new ProfileDto(profile);
     }

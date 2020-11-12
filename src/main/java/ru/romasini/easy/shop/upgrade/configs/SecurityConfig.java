@@ -2,6 +2,7 @@ package ru.romasini.easy.shop.upgrade.configs;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,9 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/cart/**").authenticated()
                 .antMatchers("/api/v1/cart").authenticated()
                 .antMatchers("/api/v1/profile**").authenticated()
-                .antMatchers("/api/v1/products**").permitAll()
-                .antMatchers("/api/v1/registration**").permitAll()
-                .antMatchers("/api/v1/category**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/products**").permitAll()
+                .antMatchers("/registration**").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/v1/category**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().permitAll()
                 .and()

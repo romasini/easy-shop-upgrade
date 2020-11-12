@@ -16,7 +16,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="p in OrdersPage.content">
-                    <td>{{p.id}}</td>
+                    <td><a href="#!/orders/{{p.id}}">{{p.id}}</a></td>
                     <td>{{p.name}}</td>
                     <td>{{p.phone}}</td>
                     <td>{{p.address}}</td>
