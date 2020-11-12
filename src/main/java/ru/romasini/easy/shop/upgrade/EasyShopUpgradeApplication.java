@@ -9,7 +9,6 @@ public class EasyShopUpgradeApplication {
 	//VM options -Dspring.profiles.active=h2
 	//V1__ ДВА нижних подчеркивания
 
-	//59
 
 	// Домашнее задание:
 	// 1. Добавить выгрузку всех продуктов через SOAP
@@ -32,6 +31,5 @@ public class EasyShopUpgradeApplication {
 //карточка товара для покупателя
 //неавторизованный доступ к карточке товара (просмотр)
 //регистрация пользователя
-//редактирование профиля
 
 

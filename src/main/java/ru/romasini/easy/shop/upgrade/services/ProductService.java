@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.romasini.easy.shop.upgrade.entities.Product;
 import ru.romasini.easy.shop.upgrade.repositories.ProductRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,10 @@ public class ProductService {
 
     public Page<Product> findAll(Specification<Product> spec, Integer numPage, int sizePage){
         return productRepository.findAll(spec, PageRequest.of(numPage, sizePage));
+    }
+
+    public List<Product> findAll(){
+        return productRepository.findAll();
     }
 
     public Optional<Product> findById(Long id){

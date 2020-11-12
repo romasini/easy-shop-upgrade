@@ -1,0 +1,32 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:eshp="http://www.romasini.ru/spring/ws/main"
+           targetNamespace="http://www.romasini.ru/spring/ws/main"
+           elementFormDefault="qualified">
+
+    <xs:element name="getProductsRequest"/>
+
+    <xs:element name="getProductsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="products" maxOccurs="unbounded" type="eshp:product"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="product">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="price" type="xs:int"/>
+            <xs:element name="category" type="eshp:category"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="category">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="title" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
