@@ -8,6 +8,8 @@
 
 package ru.romasini.easy.shop.upgrade.ws;
 
+import ru.romasini.easy.shop.upgrade.entities.Product;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -43,14 +45,14 @@ import javax.xml.bind.annotation.XmlType;
     "price",
     "category"
 })
-public class Product {
+public class ProductWs {
 
     protected Long id;
     @XmlElement(required = true)
     protected String title;
     protected int price;
     @XmlElement(required = true)
-    protected Category category;
+    protected CategoryWs category;
 
     /**
      * Gets the value of the id property.
@@ -113,10 +115,10 @@ public class Product {
      * 
      * @return
      *     possible object is
-     *     {@link Category }
+     *     {@link CategoryWs }
      *     
      */
-    public Category getCategory() {
+    public CategoryWs getCategory() {
         return category;
     }
 
@@ -125,21 +127,21 @@ public class Product {
      * 
      * @param value
      *     allowed object is
-     *     {@link Category }
+     *     {@link CategoryWs }
      *     
      */
-    public void setCategory(Category value) {
+    public void setCategory(CategoryWs value) {
         this.category = value;
     }
 
-    public Product(){
+    public ProductWs(){
 
     }
 
-    public Product(ru.romasini.easy.shop.upgrade.entities.Product product){
+    public ProductWs(Product product){
         this.id = product.getId();
         this.title = product.getTitle();
         this.price = product.getPrice();
-        this.category = new Category(product.getCategory());
+        this.category = new CategoryWs(product.getCategory());
     }
 }

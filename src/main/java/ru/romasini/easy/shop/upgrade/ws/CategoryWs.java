@@ -8,6 +8,8 @@
 
 package ru.romasini.easy.shop.upgrade.ws;
 
+import ru.romasini.easy.shop.upgrade.entities.Category;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -39,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
     "id",
     "title"
 })
-public class Category {
+public class CategoryWs {
 
     protected Long id;
     @XmlElement(required = true)
@@ -85,11 +87,11 @@ public class Category {
         this.title = value;
     }
 
-    public Category(){
+    public CategoryWs(){
 
     }
 
-    public Category(ru.romasini.easy.shop.upgrade.entities.Category category){
+    public CategoryWs(Category category){
         this.id = category.getId();
         this.title = category.getTitle();
     }

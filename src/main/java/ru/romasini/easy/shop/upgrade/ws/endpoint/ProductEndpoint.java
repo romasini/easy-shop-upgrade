@@ -6,7 +6,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import ru.romasini.easy.shop.upgrade.services.ProductService;
 import ru.romasini.easy.shop.upgrade.ws.GetProductsResponse;
-import ru.romasini.easy.shop.upgrade.ws.Product;
+import ru.romasini.easy.shop.upgrade.ws.ProductWs;
 
 import java.util.stream.Collectors;
 
@@ -25,7 +25,7 @@ public class ProductEndpoint {
     @ResponsePayload
     public GetProductsResponse getProducts(){
         GetProductsResponse response = new GetProductsResponse();
-        response.setProducts(productService.findAll().stream().map((p)-> new Product(p)).collect(Collectors.toList()));
+        response.setProducts(productService.findAll().stream().map((p)-> new ProductWs(p)).collect(Collectors.toList()));
         return response;
     }
 
