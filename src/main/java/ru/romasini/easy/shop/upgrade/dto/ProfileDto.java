@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.romasini.easy.shop.upgrade.entities.Profile;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Data

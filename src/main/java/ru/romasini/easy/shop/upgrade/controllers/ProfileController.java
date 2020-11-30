@@ -1,12 +1,15 @@
 package ru.romasini.easy.shop.upgrade.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ru.romasini.easy.shop.upgrade.dto.ProfileDto;
 import ru.romasini.easy.shop.upgrade.entities.Profile;
 import ru.romasini.easy.shop.upgrade.entities.User;
+import ru.romasini.easy.shop.upgrade.exceptions.MarketError;
 import ru.romasini.easy.shop.upgrade.exceptions.ResourceNotFoundException;
 import ru.romasini.easy.shop.upgrade.services.ProfileService;
 import ru.romasini.easy.shop.upgrade.services.UserService;
@@ -22,49 +25,29 @@ public class ProfileController {
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     public ProfileDto getProfile(Principal principal){
         User user = userService.findByUsername(principal.getName()).orElseThrow(()-> new UsernameNotFoundException(String.format("User '%s' not found", principal.getName())));
         return new ProfileDto(user.getProfile());
     }
 
     @PutMapping
-    public ProfileDto updateProfile(@RequestParam String password,
-                                    @RequestParam Map<String, String> params,
-                                    Principal principal){
-         User user = userService.findByUsername(principal.getName()).orElseThrow(()-> new UsernameNotFoundException(String.format("User '%s' not found", principal.getName())));
-        if(!passwordEncoder.matches(password, user.getPassword())) throw new ResourceNotFoundException("Password uncorrect");
+    public ResponseEntity<?> updateProfile(@RequestBody ProfileDto profileDto,
+                                        @RequestParam String password,
+                                        Principal principal){
+        User user = userService.findByUsername(principal.getName()).orElseThrow(()-> new UsernameNotFoundException(String.format("User '%s' not found", principal.getName())));
+        if(!passwordEncoder.matches(password, user.getPassword())) {
+            return new ResponseEntity<>(new MarketError(HttpStatus.BAD_REQUEST.value(),"Incorrect Password"), HttpStatus.BAD_REQUEST);
+        };
         Profile profile = user.getProfile();
-
-        String firstname = params.get("firstname");
-        if(firstname != null) profile.setFirstname(firstname);
-
-        String lastname = params.get("lastname");
-        if(lastname != null) profile.setLastname(lastname);
-
-        String phone = params.get("phone");
-        if(phone != null) profile.setPhone(phone);
-
-        String email = params.get("email");
-        if(email != null) profile.setEmail(email);
-
-//        String birthdate = params.get("birthdate");
-//        if(birthdate != null) {
-//            DateFormat df = DateFormat.getInstance();
-//            try {
-//                profile.setBirthdate(df.parse(birthdate));
-//            } catch (ParseException e) {
-//                throw new ResourceNotFoundException("Birthdate uncorrect");
-//            }
-//        }
-
-        String sex =  params.get("sex");
-        if(sex != null) profile.setSex(sex);
-
-        String address =  params.get("address");
-        if(address != null) profile.setAddress(address);
-
+        profile.setAddress(profileDto.getAddress());
+        profile.setBirthdate(profileDto.getBirthdate());
+        profile.setEmail(profileDto.getEmail());
+        profile.setPhone(profileDto.getPhone());
+        profile.setLastname(profileDto.getLastname());
+        profile.setFirstname(profileDto.getFirstname());
+        profile.setSex(profileDto.getSex());
         profile = profileService.save(profile);
-        return new ProfileDto(profile);
+        return new ResponseEntity<>(new ProfileDto(profile), HttpStatus.OK);
     }
 }
