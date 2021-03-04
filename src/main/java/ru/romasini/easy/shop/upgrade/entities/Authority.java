@@ -6,9 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "roles")
-public class Role {
-
+@Table(name = "authorities")
+public class Authority {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -16,8 +15,5 @@ public class Role {
 
     @Column(name = "name")
     private String name;
-
-    //todo
-    //получить список Авторитиз, привязанной к роли
 
 }
