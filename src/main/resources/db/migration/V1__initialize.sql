@@ -15,6 +15,16 @@ CREATE TABLE roles (
     name VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE authorities (
+    id serial PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE roles_authorities(
+    role_id int NOT NULL REFERENCES roles(id),
+    authority_id int NOT NULL REFERENCES authorities(id)
+);
+
 CREATE TABLE users (
     id bigserial PRIMARY KEY,
     username VARCHAR(30) NOT NULL,
@@ -61,6 +71,17 @@ VALUES
 ('ROLE_ADMIN'),
 ('ROLE_MANAGER'),
 ('ROLE_CUSTOMER');
+
+INSERT INTO authorities(name)
+VALUES
+('SUPER'),
+('NOT_SUPER');
+
+INSERT INTO roles_authorities(role_id, authority_id)
+VALUES
+(1, 1),
+(2, 2),
+(3, 2);
 
 INSERT INTO users (username, password, email)
 VALUES

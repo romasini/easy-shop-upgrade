@@ -13,7 +13,9 @@ import ru.romasini.easy.shop.upgrade.entities.Role;
 import ru.romasini.easy.shop.upgrade.entities.User;
 import ru.romasini.easy.shop.upgrade.repositories.UserRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,16 @@ public class UserService implements UserDetailsService {
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+        List<SimpleGrantedAuthority> list = new ArrayList<>();
+        List<String> names = new ArrayList<>();
+        for (Role r:roles) {
+            names.add(r.getName());
+            names.addAll(r.getAuthorities().stream().map(a->a.getName()).collect(Collectors.toList()));
+        }
+
+        for (String a:names) {
+            list.add(new SimpleGrantedAuthority(a));
+        }
+        return list;
     }
 }
